@@ -5,7 +5,7 @@ const products = [
         'quantity': 6
     },
     {
-        'id': 1,
+        'id': 2,
         'name': 'Iphone 11',
         'quantity': 23
     }

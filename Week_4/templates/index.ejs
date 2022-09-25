@@ -5,11 +5,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Product List</title>
 </head>
 
 <body>
-    <h1>Hello world!</h1>
+
+    <form action="/add_product" enctype="multipart/form-data" method="post" class="container mt-3 mb-5 w-50">
+        <input type="number" class="form-control mb-2" placeholder="Mã Sản Phẩm" readonly name="id"
+            value="<%=new Date().getTime()%>">
+        <!--Product id will be auto generated-->
+
+        <input type="text" class="form-control mb-2" placeholder="Tên Sản Phẩm" name="name" required>
+
+        <input type="number" class="form-control mb-2" placeholder="Số Lượng" value="1" min="1" required max="999"
+            name="quantity">
+
+        <input type="submit" value="Thêm Sản Phẩm" class="btn btn-primary w-100">
+    </form>
+
+    <table class="table table-striped table-hover container w-75 text-center">
+        <thead class="table-dark text-white">
+            <td>Mã Sản Phẩm</td>
+            <td>Tên Sản Phẩm</td>
+            <td>Số Lượng</td>
+            <td>Thao Tác</td>
+        </thead>
+
+        <%products.forEach(product=> {%>
+            <tr>
+                <td>
+                    <%=product.id%>
+                </td>
+                <td class="text-start">
+                    <%=product.name%>
+                </td>
+                <td>
+                    <%=product.quantity%>
+                </td>
+                <td>
+                    <a href="/delete?productID=<%=product.id%>" class="btn btn-danger text-white"
+                        onclick="if(!confirm('Are you sure you want to delete this product?')) return false">Delete</a>
+                    <a href="/update?productID=<%=product.id%>" class="btn btn-primary text-white">Update</a>
+                </td>
+            </tr>
+            <%})%>
+    </table>
+
 </body>
 
 </html>

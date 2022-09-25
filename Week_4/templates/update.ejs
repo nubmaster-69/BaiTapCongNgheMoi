@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Update Product</title>
+</head>
+
+<body>
+    <form action="/update_product" enctype="multipart/form-data" method="post" class="container mt-3 mb-5 w-50">
+        <input type="number" class="form-control mb-2" placeholder="Mã Sản Phẩm" readonly name="id"
+            value="<%=product.id%>">
+
+        <input type="text" class="form-control mb-2" placeholder="Tên Sản Phẩm" name="name" value="<%=product.name%>"
+            required>
+
+        <input type="number" class="form-control mb-2" placeholder="Số Lượng" value="1" min="1" required max="999"
+            name="quantity" value="<%=product.quantity%>">
+
+        <input type="submit" value="Cập Nhật Sản Phẩm" class="btn btn-primary w-100">
+    </form>
+</body>
+
+</html>
