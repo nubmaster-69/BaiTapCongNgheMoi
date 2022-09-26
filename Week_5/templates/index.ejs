@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>DynamoDB - Simple CRUD</title>
+</head>
+
+<body>
+
+    <form action="/add_product" enctype="multipart/form-data" method="POST" class="container w-50 my-3">
+        <input type="number" class="form-control mb-2" readonly required name="id" placeholder="Mã Sản Phẩm"
+            value="<%= new Date().getTime()%>">
+
+        <input type="text" class="form-control mb-2" required name="name" placeholder="Tên Sản Phẩm">
+
+        <input type="number" class="form-control mb-2" name="quantity" placeholder="Số Lượng" min="1" max="999"
+            required>
+
+        <input type="submit" class="btn btn-primary text-white w-100" value="Thêm Sản Phẩm">
+    </form>
+
+    <% if(typeof err !='undefined' ) {%>
+        <div class="container alert alert-danger w-50" role="alert">
+            <%=err%>
+        </div>
+        <%}%>
+
+            <table class="container table table-striped table-hover text-center w-75">
+                <thead class="table-dark text-white">
+                    <td>Mã Sản Phẩm</td>
+                    <td>Tên Sản Phẩm</td>
+                    <td>Số Lượng</td>
+                    <td>Thao Tác</td>
+                </thead>
+
+
+                <% if(typeof products !='undefined' ) products.forEach(product=> {%>
+                    <tr>
+                        <td>
+                            <%= product.id %>
+                        </td>
+                        <td>
+                            <%= product.name %>
+                        </td>
+                        <td>
+                            <%= product.quantity %>
+                        </td>
+                        <td>
+                            <a href="/delete?pid=<%=product.id%>" class="btn btn-danger text-white"
+                                onclick="if(!confirm('Are you sure want to delete this product?!')) return false">Xoá</a>
+                            <a href="/update?pid=<%=product.id%>" class="btn btn-primary text-white">Cập Nhật</a>
+                        </td>
+                    </tr>
+                    <%})%>
+            </table>
+
+</body>
+
+</html>
