@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Demo Upload With S3</title>
+</head>
+
+<body>
+    <form action="/add_product" enctype="multipart/form-data" method="post" class="container w-75 my-3">
+        <input type="number" readonly="readonly" value="<%= new Date().getTime() %>" name="id"
+            class="form-control mb-3">
+
+        <input type="text" class="form-control mb-3" placeholder="Tên Sản Phẩm" required="required" name="name">
+
+        <input type="number" class="form-control mb-3" placeholder="Số Lượng Sản Phẩm" min="1" max="999"
+            required="required" name="quantity">
+
+        <input type="file" class="form-control mb-3" placeholder="Ảnh Minh Hoạ Sản Phẩm" required="required"
+            name="image" accept="image/*">
+
+        <input type="submit" value="Thêm Sản Phẩm" class="btn btn-primary text-white w-100">
+    </form>
+
+    <table class="table table-striped table-hover text-center w-75 container">
+        <thead class="table-dark text-white">
+            <td>Mã Sản Phẩm</td>
+            <td>Tên Sản Phẩm</td>
+            <td>Số Lượng</td>
+            <td>Hình Ảnh</td>
+            <td>Thao Tác</td>
+        </thead>
+
+        <% if(typeof products !='undefined' ) products.forEach(product=> {%>
+            <tr>
+                <td>
+                    <%= product.id %>
+                </td>
+                <td>
+                    <%= product.name %>
+                </td>
+                <td>
+                    <%= product.quantity %>
+                </td>
+                <td>
+                    <img src="<%= product.image %>" alt="product image" width="150px">
+                </td>
+                <td>
+                    <a href="/update?id=<%= product.id %>" class="btn btn-primary text-white">Cập Nhật</a>
+                    <a href="/delete?id=<%= product.id %>" class="btn btn-danger text-white"
+                        onclick="if(!confirm('Are you sure you wanna delete this product?')) return false">Xoá</a>
+                </td>
+            </tr>
+            <%})%>
+
+    </table>
+</body>
+
+</html>
